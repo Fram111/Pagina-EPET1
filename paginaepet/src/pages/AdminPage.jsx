@@ -132,7 +132,7 @@ export default function AdminPage() {
     setDraft((current) => ({ ...current, [field]: value }));
   };
 
-  const persist = async (publish = false, isAutoSave = false) => {
+  const persist = useCallback(async (publish = false, isAutoSave = false) => {
     if (!draft || busy) return;
     setError("");
     if (!isAutoSave) setMessage("");
@@ -159,13 +159,13 @@ export default function AdminPage() {
     } finally {
       setBusy(false);
     }
-  };
+  }, [busy, draft, refreshNews, session?.user?.id]);
 
   useEffect(() => {
     if (!draft?.id || !dirtyRef.current) return undefined;
     const timer = setTimeout(() => { if (dirtyRef.current) persist(false, true); }, 1800);
     return () => clearTimeout(timer);
-  }, [draft]);
+  }, [draft, persist]);
 
   const handleImage = async (event) => {
     const file = event.target.files?.[0];
