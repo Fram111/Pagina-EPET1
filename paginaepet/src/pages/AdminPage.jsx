@@ -322,7 +322,7 @@ export default function AdminPage() {
                   <textarea className={inputClass + " mt-1.5 resize-y"} rows={3} maxLength={400} value={draft.summary} onChange={(e) => updateDraft("summary", e.target.value)} placeholder="Una descripción breve para la tarjeta pública." />
                   <span className="mt-1 block text-right text-xs text-muted-foreground">{draft.summary.length}/400</span>
                 </label>
-                <div><span className="mb-1.5 block text-sm font-medium text-primary">Cuerpo de la noticia</span><RichTextEditor value={draft.body} onChange={(body) => updateDraft("body", body)} /></div>
+                <div><span className="mb-1.5 block text-sm font-medium text-primary">Cuerpo de la noticia</span><RichTextEditor key={draft.id || "new"} value={draft.body} onChange={(body) => updateDraft("body", body)} /></div>
               </div>
 
               {error && <p role="alert" className="mt-5 rounded-md bg-red-50 p-3 text-sm text-red-700">{error}</p>}
