@@ -149,9 +149,12 @@ begin
     end if;
   end if;
 
-  return case when tg_op = 'DELETE' then old else new end;
+  if tg_op = 'DELETE' then
+    return old;
+  end if;
+  return new;
 end;
-$$;
+$;
 
 drop trigger if exists news_editor_permissions on public.news;
 create trigger news_editor_permissions
