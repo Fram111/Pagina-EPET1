@@ -1,15 +1,13 @@
-# Módulo de noticias — preparación de Supabase
+# Módulo de noticias — Supabase
 
-Este directorio contiene la primera migración del módulo de noticias de la EPET N.º 1.
+Este directorio contiene la migración SQL y las instrucciones para conectar el módulo de noticias de la EPET N.º 1.
 
-## Antes de aplicar la migración
+## Configuración de Supabase
 
-1. Crear un proyecto en Supabase.
-2. Abrir SQL Editor y ejecutar el archivo de migración ubicado en
-   `supabase/migrations/202610110001_news_module.sql`.
-3. En Authentication, desactivar el registro público si no se utilizará.
-4. Crear manualmente el usuario inicial del administrador.
-5. Después de crear el usuario, ejecutar en SQL Editor, reemplazando el correo:
+1. En Supabase, abrir **SQL Editor** y ejecutar migrations/202610110001_news_module.sql.
+2. En **Authentication**, desactivar el registro público si no se utilizará.
+3. Crear manualmente el usuario inicial del administrador.
+4. Después de crear ese usuario, ejecutar en SQL Editor, reemplazando el correo:
 
    ```sql
    update public.profiles
@@ -20,18 +18,26 @@ Este directorio contiene la primera migración del módulo de noticias de la EPE
    );
    ```
 
-6. Copiar `.env.example` a `.env.local` y completar `VITE_SUPABASE_URL`
-   y `VITE_SUPABASE_ANON_KEY` con los valores del proyecto.
+5. En la carpeta paginaepet, copiar .env.example a .env.local y completar VITE_SUPABASE_URL y VITE_SUPABASE_ANON_KEY con los datos del proyecto.
+6. Instalar las dependencias con npm install y ejecutar npm run dev desde paginaepet.
+
+## Uso del panel
+
+- Entrar a /admin e iniciar sesión con una cuenta autorizada.
+- Administradores y redactores pueden crear y editar noticias.
+- Los borradores existentes se autoguardan después de dejar de escribir; al crear una noticia nueva, hay que guardarla manualmente una primera vez.
+- Se puede subir una imagen de portada al bucket news-images (máximo 5 MB; JPEG, PNG, WebP o GIF).
+- Las noticias publicadas se muestran en la sección pública.
+- Solo los administradores pueden eliminar noticias. Las cuentas nuevas quedan como pending hasta que el administrador les asigne el rol editor o admin en la tabla profiles.
 
 ## Seguridad
 
-- Los usuarios nuevos quedan con rol `pending` hasta que un administrador los autorice.
-- Las noticias publicadas se pueden leer públicamente.
-- Los borradores requieren sesión con rol `admin` o `editor`.
-- Solo los administradores pueden archivar o eliminar noticias.
-- El bucket `news-images` permite lectura pública y escritura autenticada para editores.
-- La clave `service_role` nunca debe usarse en el frontend ni subirse al repositorio.
+- Las políticas RLS limitan la lectura de borradores y la edición según el rol.
+- La clave service_role nunca debe usarse en el frontend ni subirse al repositorio.
+- .env.local está excluido por .gitignore; no publiques sus valores.
 
-## Nota de integración
+## Pendiente
 
-Esta migración prepara la base de datos y las políticas de seguridad. Todavía no conecta los componentes React, no implementa la invitación de usuarios desde el panel y no migra automáticamente las noticias que hoy están en `localStorage`. Esos pasos pertenecen a las siguientes etapas.
+- No se ha ejecutado un build/lint desde este entorno.
+- package-lock.json debe regenerarse con npm install para incorporar las nuevas dependencias de Supabase y Tiptap.
+- La invitación/gestión de redactores desde el propio panel y la importación automática de las noticias antiguas aún no están implementadas.
