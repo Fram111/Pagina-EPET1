@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "npm run build:news && vite",
     "build": "npm run build:news && vite build",
-    "build:news": "node scripts/build-noticias.mjs",
+    "build:news": "node scripts/build.noticias.mjs",
     "lint": "eslint . --quiet",
     "lint:fix": "eslint . --fix",
     "preview": "vite preview"
