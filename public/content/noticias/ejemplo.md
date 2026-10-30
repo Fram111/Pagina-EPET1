@@ -1,0 +1,10 @@
+---
+id: noticia-1
+titulo: "Llegó septiembre: cibercafé y actividades por la Semana del Estudiante"
+fecha: "2026-09-01"
+categoria: Vida estudiantil
+imagen: https://media.base44.com/images/public/6a977a33f3889af31cc7607e/d77b22ca0_generated_e5342a9e.jpg
+resumen: Los cursos de 6° año, 3° y 1° división organizan un cibercafé y actividades recreativas en el patio para celebrar la primavera y la Semana del Estudiante.
+---
+
+Con la llegada de la primavera, los estudiantes de 6° año —3° y 1° división— prepararon un cibercafé acompañado de actividades recreativas en el patio de la escuela.
